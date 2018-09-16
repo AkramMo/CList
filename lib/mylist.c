@@ -52,7 +52,7 @@ void mylist_insert(
 			new_node->next = before->next;
 			new_node->data = data;
 
-			before->next = &new_node;
+			before->next = new_node;
 			l->length++;
 		}
 	}else if(!l->first){

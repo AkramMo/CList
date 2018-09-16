@@ -12,7 +12,7 @@
 //  }
 //
 //  struct mylist_node* target = mylist_find(&l, 4);
-//A
+//
 //  if (target != NULL) {
 //    mylist_remove(&l, target);
 //  }

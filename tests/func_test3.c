@@ -11,7 +11,7 @@
 //    mylist_insert(&l, NULL, i);
 //  }
 //
-//  A(&l, mylist_get_head(&l));
+//  mylist_remove(&l, mylist_get_head(&l));
 //
 //  mylist_print(&l);
 //
