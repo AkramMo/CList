@@ -3,6 +3,10 @@
 
 #include "mylist.h"
 
+/**
+ * Initialise the linked list
+ * @param l
+ */
 void mylist_init(struct mylist* l)
 {
 	// TODO: Fill it
@@ -11,6 +15,11 @@ void mylist_init(struct mylist* l)
 	l->head = NULL;
 }
 
+/**
+ * Destroy all the linked list elements
+ * and manage to free the memory
+ * @param l
+ */
 void mylist_destroy(struct mylist* l)
 {
 	// TODO: Fill it
@@ -29,6 +38,14 @@ void mylist_destroy(struct mylist* l)
 
 }
 
+/**
+ * Function that create a new node in the list
+ * with the data received and at the right
+ * position
+ * @param l
+ * @param before
+ * @param data
+ */
 void mylist_insert(
 		struct mylist* l,
 		struct mylist_node* before, int data)
@@ -72,11 +89,14 @@ void mylist_insert(
 		l->head = new_node;
 
 	}
-
-
-
 }
 
+/**
+ * Remove a specified node and free
+ * his memory
+ * @param l
+ * @param target
+ */
 void mylist_remove(
 		struct mylist* l,
 		struct mylist_node* target)
@@ -103,6 +123,13 @@ void mylist_remove(
 	}
 }
 
+/**
+ * Find and return the right node according to
+ * the data.
+ * @param l
+ * @param target
+ * @return
+ */
 struct mylist_node* mylist_find(struct mylist* l, int target)
 {
 	// TODO: Fill it
@@ -124,6 +151,11 @@ struct mylist_node* mylist_find(struct mylist* l, int target)
 	return NULL; // If not found
 }
 
+/**
+ * Return the head of the single list.
+ * @param l
+ * @return
+ */
 struct mylist_node* mylist_get_head(struct mylist* l)
 {
 	// TODO: Fill it
@@ -131,25 +163,18 @@ struct mylist_node* mylist_get_head(struct mylist* l)
 	return l->head;
 
 }
+
+/**
+ * Print all the data in the list
+ * @param l
+ */
 void mylist_print(const struct mylist* l)
 {
-	/*
-	 * HINT: Define structs referring comments
-  for (struct mylist_node* pointer = l->head;
-      pointer != NULL;
-      pointer = pointer->next) {
-    printf("%d\n", pointer->data);
-  }
-	 */
-
-
 	for (struct mylist_node* pointer = l->first;
 			pointer != NULL;
 			pointer = pointer->next) {
 		printf("%d\n", pointer->data);
 	}
-
-
 }
 
 
