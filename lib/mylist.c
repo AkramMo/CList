@@ -11,7 +11,6 @@ void mylist_init(struct mylist* l)
 {
 	// TODO: Fill it
 	l->length = 0;
-	l->first = NULL;
 	l->head = NULL;
 }
 
@@ -26,7 +25,7 @@ void mylist_destroy(struct mylist* l)
 	struct mylist_node *tmp = NULL;
 	struct mylist_node *tmp2 = NULL;
 
-	tmp = l->first;
+	tmp = l->head;
 
 
 	while(tmp->next){
@@ -52,7 +51,7 @@ void mylist_insert(
 {
 	// TODO: Fill it
 
-	struct mylist_node *new_node = 	malloc(sizeof(struct mylist_node)) ;
+	struct mylist_node *new_node = (struct mylist_node*)	malloc(sizeof(struct mylist_node)) ;
 
 	if(before){
 
@@ -63,7 +62,7 @@ void mylist_insert(
 
 			before->next = new_node;
 			l->length++;
-			l->head = new_node;
+			l->head = before;
 		}else {
 
 			new_node->next = before->next;
@@ -72,21 +71,21 @@ void mylist_insert(
 			before->next = new_node;
 			l->length++;
 		}
-	}else if(!l->first){
+	}else if(!l->head){
 
 		new_node->next = NULL;
 		new_node->data = data;
 
-		l->first = new_node;
 		l->head = new_node;
+		l->length++;
 
 	}else{
 
-		new_node->next = NULL;
+		new_node->next = l->head;
 		new_node->data = data;
 
-		l->head->next = new_node;
 		l->head = new_node;
+		l->length++;
 
 	}
 }
@@ -103,22 +102,35 @@ void mylist_remove(
 {
 	// TODO: Fill it
 
-	struct mylist_node *tmp;
+	struct mylist_node *tmp = l->head;
 	struct mylist_node *tmp2 = NULL;
 
-	tmp = l->first;
+	if(tmp == target){
 
-	while(tmp->next){
+		l->head = tmp->next;
+		tmp->next = NULL;
+		tmp->data = 0;
+		free(tmp);
+		tmp = NULL;
+		l->length--;
+	}else{
 
-		tmp2 = tmp->next;
+		while(tmp != NULL && tmp != target){
 
-		if(tmp2 == target){
+			tmp2 = tmp;
+			tmp = tmp->next;
 
-			tmp->next = tmp2->next;
-			free(tmp2);
+		}
+
+		if(tmp->next == NULL){
+
+			return;
+
 		}else{
 
-			tmp = tmp2;
+			tmp2->next = tmp->next;
+			free(tmp);
+			l->length--;
 		}
 	}
 }
@@ -136,9 +148,9 @@ struct mylist_node* mylist_find(struct mylist* l, int target)
 
 	struct mylist_node *tmp;
 
-	tmp = l->first;
+	tmp = l->head;
 
-	while(tmp->next != NULL || tmp == l->first){
+	while(tmp->next != NULL || tmp == l->head){
 
 		if(tmp->data == target){
 
@@ -170,7 +182,7 @@ struct mylist_node* mylist_get_head(struct mylist* l)
  */
 void mylist_print(const struct mylist* l)
 {
-	for (struct mylist_node* pointer = l->first;
+	for (struct mylist_node* pointer = l->head;
 			pointer != NULL;
 			pointer = pointer->next) {
 		printf("%d\n", pointer->data);

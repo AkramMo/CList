@@ -10,7 +10,6 @@ struct mylist_node {
 struct mylist {
   // TODO: Fill it
 	struct mylist_node *head;
-	struct mylist_node *first;
 	int length;
 };
 
