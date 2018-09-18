@@ -28,13 +28,16 @@ void mylist_destroy(struct mylist* l)
 	tmp = l->head;
 
 
-	while(tmp->next){
+	while(tmp){
 
 		tmp2 = tmp->next;
 		free(tmp);
 		tmp = tmp2;
+		l->length--;
 	}
 
+	l->head = NULL;
+	l = NULL;
 }
 
 /**
@@ -51,7 +54,7 @@ void mylist_insert(
 {
 	// TODO: Fill it
 
-	struct mylist_node *new_node = (struct mylist_node*)	malloc(sizeof(struct mylist_node)) ;
+	struct mylist_node *new_node = malloc(sizeof(struct mylist_node)) ;
 
 	if(before){
 
